@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public readable collections
+    match /villas/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /rates/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /experiences/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /dining/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /flight_redirects/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+
+    // Write-only for guests (leads submitted via Cloud Function)
+    match /leads/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
+    // Admin-only collections
+    match /conversions/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /audit_logs/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /ad_campaigns/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /inventory/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /admin_users/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/admin_users/$(request.auth.uid));
+    }
+  }
+}

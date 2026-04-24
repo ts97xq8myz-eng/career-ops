@@ -1,0 +1,129 @@
+import type { Metadata } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
+import Script from "next/script";
+import "./globals.css";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { WhatsAppCTA } from "@/components/whatsapp-cta";
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const GTAG_ID = process.env.NEXT_PUBLIC_GTAG_ID ?? "";
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://veligandu.com"),
+  title: {
+    default: "Veligandu Island Resort — Maldives Direct Booking",
+    template: "%s | Veligandu Maldives",
+  },
+  description:
+    "Book direct at Veligandu Island Resort in the Maldives for the best available rate. Overwater villas, beach villas, and honeymoon suites in the pristine Indian Ocean.",
+  keywords: [
+    "Veligandu",
+    "Maldives resort",
+    "overwater villa",
+    "Maldives direct booking",
+    "North Ari Atoll",
+    "Maldives honeymoon",
+    "luxury Maldives",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://veligandu.com",
+    siteName: "Veligandu Island Resort",
+    title: "Veligandu Island Resort — Maldives Direct Booking",
+    description:
+      "Book direct for the best rate. Overwater villas and beach villas in the heart of the Indian Ocean.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=85",
+        width: 1200,
+        height: 630,
+        alt: "Veligandu Maldives Overwater Villa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Veligandu Island Resort — Maldives",
+    description: "Book direct for the best available rate.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <head>
+        {/* Hotel Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LodgingBusiness",
+              name: "Veligandu Island Resort",
+              description: "Luxury overwater and beach villa resort in the Maldives",
+              url: "https://veligandu.com",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Rasdhoo Atoll",
+                addressRegion: "North Ari Atoll",
+                addressCountry: "MV",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "4.2167",
+                longitude: "72.9833",
+              },
+              starRating: { "@type": "Rating", ratingValue: "5" },
+              telephone: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+9609999999",
+              email: process.env.NEXT_PUBLIC_RESORT_EMAIL ?? "reservations@veligandu.com",
+            }),
+          }}
+        />
+        {/* Meta Pixel */}
+        {META_PIXEL_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');
+              `,
+            }}
+          />
+        )}
+      </head>
+      <body className="min-h-screen flex flex-col">
+        {/* Google Analytics */}
+        {GTAG_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`} strategy="afterInteractive" />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GTAG_ID}');`}
+            </Script>
+          </>
+        )}
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <WhatsAppCTA />
+      </body>
+    </html>
+  );
+}
