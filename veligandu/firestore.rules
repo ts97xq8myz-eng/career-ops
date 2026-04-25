@@ -47,6 +47,24 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth != null && isAdmin();
     }
+
+    // Kafka-populated collections — public read, function write only
+    match /inventory_summary/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /kafka_events/{doc} {
+      allow read: if request.auth != null && isAdmin();
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /kafka_offsets/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /kafka_webhook_log/{doc} {
+      allow read: if request.auth != null && isAdmin();
+      allow write: if request.auth != null && isAdmin();
+    }
+
     match /admin_users/{doc} {
       allow read, write: if request.auth != null && isAdmin();
     }

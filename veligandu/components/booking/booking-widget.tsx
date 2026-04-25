@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Users, CalendarDays, Home, ChevronDown } from "lucide-react";
+import { CalendarDays, Radio } from "lucide-react";
+import { useRates } from "@/lib/firebase/hooks/useRates";
+import { formatCurrency } from "@/lib/utils";
 
 const VILLA_OPTIONS = [
   { value: "", label: "Any Villa Type" },
@@ -34,6 +36,9 @@ export function BookingWidget({ compact = false }: BookingWidgetProps) {
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
   const [villaCategory, setVillaCategory] = useState("");
+
+  const { rates } = useRates();
+  const activeLive = villaCategory ? rates.get(villaCategory) : null;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,7 +132,21 @@ export function BookingWidget({ compact = false }: BookingWidgetProps) {
             </select>
           </div>
         )}
-        <div className="flex items-end">
+        <div className="flex flex-col gap-2 items-stretch">
+          {/* Live rate preview for selected villa */}
+          {activeLive && !compact && (
+            <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2 text-xs text-white/90">
+              <span className="flex items-center gap-1">
+                {activeLive.isLive && <Radio className="w-2.5 h-2.5 text-emerald-400 animate-pulse" />}
+                From <strong className="text-white ml-1">{formatCurrency(activeLive.directRate)}</strong>/night
+              </span>
+              {activeLive.isLive && (
+                <span className="text-emerald-400 font-semibold uppercase tracking-wider text-[9px]">
+                  Live · Kafka
+                </span>
+              )}
+            </div>
+          )}
           <Button type="submit" variant="primary" size="lg" fullWidth>
             Check Availability
           </Button>

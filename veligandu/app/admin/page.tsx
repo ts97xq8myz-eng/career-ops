@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Users, DollarSign, TrendingUp, Eye } from "lucide-react";
+import { KafkaHealthPanel } from "@/components/admin/kafka-health";
 
 const STATS = [
   { label: "Total Leads (30d)", value: "47", change: "+12%", icon: Users, color: "bg-blue-50 text-blue-700" },
@@ -92,6 +93,11 @@ export default function AdminDashboard() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Kafka Live Feed */}
+      <div className="mt-8">
+        <KafkaHealthPanel />
       </div>
     </div>
   );

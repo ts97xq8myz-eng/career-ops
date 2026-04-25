@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/hero";
-import { VillaCard } from "@/components/villas/villa-card";
+import { LiveVillaGrid } from "@/components/villas/live-villa-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 import { VILLAS_SEED } from "@/lib/data/villas";
 
@@ -28,11 +28,7 @@ export default function VillasPage() {
             subtitle="From intimate beach retreats to west-facing overwater suites with private pools — all villas include direct lagoon or beach access."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {VILLAS_SEED.map((villa) => (
-              <VillaCard key={villa.id} villa={villa} />
-            ))}
-          </div>
+          <LiveVillaGrid villas={VILLAS_SEED} />
         </div>
       </section>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/layout/hero";
 import { BookingWidget } from "@/components/booking/booking-widget";
-import { VillaCard } from "@/components/villas/villa-card";
+import { LiveVillaGrid } from "@/components/villas/live-villa-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { PlacesImage } from "@/components/ui/places-image";
@@ -103,11 +103,7 @@ export default function HomePage() {
             subtitle="From secluded beachfront bungalows to overwater retreats with glass floors — every villa is a destination in itself."
             centered
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {VILLAS_SEED.map((villa) => (
-              <VillaCard key={villa.id} villa={villa} />
-            ))}
-          </div>
+          <LiveVillaGrid villas={VILLAS_SEED} />
           <div className="text-center mt-12">
             <Link href="/villas">
               <Button variant="secondary" size="lg">

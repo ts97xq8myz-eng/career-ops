@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { FlightHelper } from "@/components/booking/flight-helper";
 import { RateDisplay } from "@/components/booking/rate-display";
 import { SectionHeader } from "@/components/ui/section-header";
-import { getFallbackRate } from "@/lib/rates/engine";
 import { trackLeadSubmit, trackBookingEngineOpened } from "@/lib/ads/gtag";
 import { trackInitiateCheckout } from "@/lib/ads/meta";
 import { NEAREST_AIRPORTS, VILLA_CATEGORY_LABELS } from "@/types";
@@ -20,6 +19,7 @@ import { formatCurrency } from "@/lib/utils";
 import { httpsCallable } from "firebase/functions";
 import { getClientFunctions } from "@/lib/firebase/client";
 import { CheckCircle } from "lucide-react";
+import { useVillaRate } from "@/lib/firebase/hooks/useRates";
 
 const schema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -93,7 +93,8 @@ function BookFormInner() {
   });
 
   const watchedVilla = watch("villaCategory");
-  const rate = getFallbackRate(watchedVilla || "overwater");
+  const { live: liveRate, getRate } = useVillaRate(watchedVilla || "overwater");
+  const rate = getRate(watchedVilla || "overwater");
 
   useEffect(() => {
     trackBookingEngineOpened(villaCategory || "unknown");
@@ -318,7 +319,7 @@ function BookFormInner() {
               <div className="sticky top-24 flex flex-col gap-4">
                 <div className="bg-white rounded-2xl p-6 shadow-[var(--shadow-card)]">
                   <p className="font-semibold text-[var(--color-ocean)] mb-3 text-sm uppercase tracking-wider">Rate Summary</p>
-                  <RateDisplay rate={rate} showDetails={false} />
+                  <RateDisplay rate={rate} liveRate={liveRate} showDetails={false} />
                 </div>
                 <div className="bg-[var(--color-ocean)] rounded-2xl p-6 text-white text-sm">
                   <p className="font-semibold mb-2">What happens next?</p>
