@@ -177,6 +177,8 @@ export const submitLead = functions.https.onCall(async (request) => {
         greenTax:      lead.quote.taxGreenTax,
         total:         lead.quote.taxTotal,
       },
+      transferType:    "speedboat",
+      transferLabel:   "Return Speedboat Transfer",
       transferCost:    lead.quote.transferCost,
       directTotal:     lead.quote.directTotal,
       savingsValue:    lead.quote.savingsValue,
