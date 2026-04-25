@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -37,16 +38,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside className="w-60 bg-[var(--color-ocean)] flex flex-col min-h-screen fixed left-0 top-0 z-40">
         {/* Brand */}
-        <div className="p-5 border-b border-white/10">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
-              <span className="font-serif text-xs font-black text-white">R&amp;S</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[8px] font-semibold text-white/40 uppercase tracking-[0.2em]">Reservations &amp; Sales</span>
-              <span className="font-serif text-sm font-bold text-white">VELIGANDU</span>
-              <span className="text-[var(--color-gold)] text-[8px] tracking-[0.2em] uppercase">Admin Portal</span>
-            </div>
+        <div className="p-5 border-b border-white/10 flex flex-col gap-1">
+          <Image
+            src="/rs-logo.svg"
+            alt="Reservations & Sales"
+            width={88}
+            height={24}
+            className="h-5 w-auto opacity-50 brightness-0 invert"
+          />
+          <div className="flex flex-col leading-none mt-0.5">
+            <span className="font-serif text-base font-bold text-white leading-tight">VELIGANDU</span>
+            <span className="text-[var(--color-gold)] text-[8px] tracking-[0.25em] uppercase">Admin Portal</span>
           </div>
         </div>
 

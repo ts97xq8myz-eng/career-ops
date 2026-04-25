@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 
@@ -13,15 +14,20 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-2">
-            {/* R&S lockup */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 rounded-lg bg-[var(--color-gold)] flex items-center justify-center flex-shrink-0">
-                <span className="font-serif text-sm font-black text-white">R&amp;S</span>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-[9px] font-semibold text-white/40 uppercase tracking-[0.25em]">Reservations &amp; Sales</span>
-                <span className="font-serif text-xl font-bold text-white leading-tight">VELIGANDU</span>
-                <span className="text-[var(--color-gold)] text-[9px] tracking-[0.3em] uppercase">Island Resort · Maldives</span>
+            {/* Brand lockup: small R&S logo → big VELIGANDU */}
+            <div className="flex flex-col gap-1 mb-5">
+              {/* R&S — small, secondary */}
+              <Image
+                src="/rs-logo.svg"
+                alt="Reservations & Sales"
+                width={100}
+                height={28}
+                className="h-6 w-auto opacity-50 brightness-0 invert"
+              />
+              {/* Veligandu — large, primary */}
+              <div className="flex flex-col leading-none mt-1">
+                <span className="font-serif text-3xl font-bold text-white leading-tight">VELIGANDU</span>
+                <span className="text-[var(--color-gold)] text-[10px] tracking-[0.35em] uppercase font-medium">Island Resort · Maldives</span>
               </div>
             </div>
 
@@ -121,7 +127,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/35">
           <p>
-            © {new Date().getFullYear()} Reservations &amp; Sales · Veligandu Island Resort.
+            © {new Date().getFullYear()} Veligandu Island Resort · Managed by Reservations &amp; Sales.
             All rights reserved.
           </p>
           <div className="flex items-center gap-4">

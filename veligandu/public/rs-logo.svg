@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none">
+  <!-- Calendar body -->
+  <rect x="2" y="8" width="38" height="34" rx="4" stroke="#3B9ED8" stroke-width="2.5" fill="white"/>
+  <!-- Calendar top bar -->
+  <rect x="2" y="8" width="38" height="9" rx="4" fill="#3B9ED8"/>
+  <rect x="2" y="13" width="38" height="4" fill="#3B9ED8"/>
+  <!-- Hanger pegs -->
+  <rect x="11" y="4" width="3" height="8" rx="1.5" fill="#3B9ED8"/>
+  <rect x="28" y="4" width="3" height="8" rx="1.5" fill="#3B9ED8"/>
+  <!-- Checkmark tick -->
+  <polyline points="12,28 18,34 30,22" stroke="#3B9ED8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- "Reservations" wordmark -->
+  <text x="48" y="26" font-family="'Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="#2D3748" letter-spacing="0.2">Reservations</text>
+
+  <!-- Horizontal rule -->
+  <line x1="48" y1="32" x2="126" y2="32" stroke="#9CA3AF" stroke-width="1"/>
+
+  <!-- "& SALES" -->
+  <text x="48" y="44" font-family="'Helvetica Neue',Arial,sans-serif" font-size="11" font-weight="400" fill="#6B7280" letter-spacing="2">&#38; SALES</text>
+</svg>

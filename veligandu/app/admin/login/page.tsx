@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -35,16 +36,22 @@ export default function AdminLoginPage() {
         <div className="bg-white rounded-2xl shadow-[var(--shadow-hero)] p-10">
           {/* Brand */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-14 h-14 rounded-xl bg-[var(--color-gold)] flex items-center justify-center mb-4 shadow-md">
-              <span className="font-serif text-lg font-black text-white">R&amp;S</span>
-            </div>
-            <p className="text-[9px] font-semibold text-[var(--color-ocean-muted)] uppercase tracking-[0.3em]">
-              Reservations &amp; Sales
-            </p>
-            <h1 className="font-serif text-2xl font-bold text-[var(--color-ocean)] mt-1">
+            {/* R&S — small, secondary */}
+            <Image
+              src="/rs-logo.svg"
+              alt="Reservations & Sales"
+              width={110}
+              height={30}
+              className="h-7 w-auto mb-3 opacity-60"
+            />
+            {/* Veligandu — large, primary */}
+            <h1 className="font-serif text-3xl font-bold text-[var(--color-ocean)] leading-tight">
               VELIGANDU
             </h1>
-            <p className="text-[var(--color-gold)] text-[10px] tracking-[0.3em] uppercase">
+            <p className="text-[var(--color-gold)] text-[11px] tracking-[0.35em] uppercase font-medium">
+              Maldives
+            </p>
+            <p className="text-gray-400 text-[10px] tracking-[0.2em] uppercase mt-2">
               Staff Portal
             </p>
           </div>
