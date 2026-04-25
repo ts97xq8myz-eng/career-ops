@@ -6,6 +6,8 @@ import { VillaCard } from "@/components/villas/villa-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { PlacesImage } from "@/components/ui/places-image";
+import { HeroPlayer } from "@/components/video/HeroPlayer";
+import { VillaPlayer } from "@/components/video/VillaPlayer";
 import { VILLAS_SEED } from "@/lib/data/villas";
 import { CheckCircle, Star, ShieldCheck, Headphones } from "lucide-react";
 
@@ -46,19 +48,16 @@ const EXPERIENCES = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — Remotion animated slideshow of all 10 Google Places photos */}
       <section className="relative min-h-screen flex flex-col">
-        <Hero
-          title={`The Maldives,\nAs It Should Be`}
-          subtitle="An intimate island paradise where every villa floats above turquoise waters and every sunset belongs to you."
-          eyebrow="Veligandu Island Resort · North Ari Atoll"
-          image="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1920&q=90"
-          placesIndex={0}
-          overlay="dark"
-          height="full"
-        />
-        <div className="absolute bottom-8 left-0 right-0 z-20 max-w-5xl mx-auto px-4 sm:px-6">
-          <BookingWidget />
+        <div className="absolute inset-0 z-0">
+          <HeroPlayer />
+        </div>
+        <div className="relative z-10 flex-1" />
+        <div className="relative z-20 pb-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <BookingWidget />
+          </div>
         </div>
       </section>
 
@@ -78,6 +77,20 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Villa Showcase — Remotion animated video */}
+      <section className="py-24 bg-[var(--color-ocean)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Veligandu Villas"
+            title="Your Private Corner of Paradise"
+            subtitle="Four categories of villa, each a world unto itself."
+            centered
+            light
+          />
+          <VillaPlayer />
         </div>
       </section>
 

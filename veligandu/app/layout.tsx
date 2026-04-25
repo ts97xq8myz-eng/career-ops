@@ -48,7 +48,7 @@ export const metadata: Metadata = {
       "Book direct for the best rate. Overwater villas and beach villas in the heart of the Indian Ocean.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=85",
+        url: "https://lh3.googleusercontent.com/places/ANXAkqE-K0E7FqXZiimT71mUNuRYKokrRTx1MsTObRhxYjKqw3YIVPSF1wQZ6CnPCM8KXU_gKIVpYJ73JtfY0utYewUF7Xn3Wicu2Pw=s1200-w1200",
         width: 1200,
         height: 630,
         alt: "Veligandu Maldives Overwater Villa",

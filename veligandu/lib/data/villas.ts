@@ -1,4 +1,5 @@
 import type { Villa } from "@/types";
+import { VILLA_PHOTO_GROUPS } from "@/lib/data/places-photos";
 
 export const VILLAS_SEED: Villa[] = [
   {
@@ -13,19 +14,9 @@ export const VILLAS_SEED: Villa[] = [
     maxOccupancy: 3,
     bedrooms: 1,
     images: [
-      {
-        url: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=85",
-        alt: "Overwater Villa Exterior with Private Deck",
-        isPrimary: true,
-      },
-      {
-        url: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1200&q=85",
-        alt: "Overwater Villa Interior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=85",
-        alt: "Private Deck with Ocean View",
-      },
+      { url: VILLA_PHOTO_GROUPS.overwater[0], alt: "Overwater Villa — Resort View", isPrimary: true },
+      { url: VILLA_PHOTO_GROUPS.overwater[1], alt: "Overwater Villa — Lagoon Deck" },
+      { url: VILLA_PHOTO_GROUPS.overwater[2], alt: "Overwater Villa — Interior" },
     ],
     amenities: [
       { icon: "waves", label: "Direct lagoon access" },
@@ -37,12 +28,7 @@ export const VILLAS_SEED: Villa[] = [
       { icon: "coffee", label: "Nespresso machine" },
       { icon: "refrigerator", label: "Minibar" },
     ],
-    highlights: [
-      "Glass floor panels",
-      "Private infinity deck",
-      "Direct lagoon ladder",
-      "Outdoor rain shower",
-    ],
+    highlights: ["Glass floor panels", "Private infinity deck", "Direct lagoon ladder", "Outdoor rain shower"],
     fromRateUSD: 850,
     available: true,
     featured: true,
@@ -61,15 +47,9 @@ export const VILLAS_SEED: Villa[] = [
     maxOccupancy: 4,
     bedrooms: 1,
     images: [
-      {
-        url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=85",
-        alt: "Beachfront Villa with Private Terrace",
-        isPrimary: true,
-      },
-      {
-        url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=85",
-        alt: "Beach Villa Interior",
-      },
+      { url: VILLA_PHOTO_GROUPS.beach[0], alt: "Beachfront Villa — Beach View", isPrimary: true },
+      { url: VILLA_PHOTO_GROUPS.beach[1], alt: "Beachfront Villa — Terrace" },
+      { url: VILLA_PHOTO_GROUPS.beach[2], alt: "Beachfront Villa — Garden" },
     ],
     amenities: [
       { icon: "waves", label: "Private beach access" },
@@ -79,12 +59,7 @@ export const VILLAS_SEED: Villa[] = [
       { icon: "coffee", label: "Nespresso machine" },
       { icon: "refrigerator", label: "Minibar" },
     ],
-    highlights: [
-      "Private beach terrace",
-      "Open-air garden bathroom",
-      "Daybed under palms",
-      "Outdoor shower",
-    ],
+    highlights: ["Private beach terrace", "Open-air garden bathroom", "Daybed under palms", "Outdoor shower"],
     fromRateUSD: 650,
     available: true,
     featured: true,
@@ -103,15 +78,9 @@ export const VILLAS_SEED: Villa[] = [
     maxOccupancy: 3,
     bedrooms: 1,
     images: [
-      {
-        url: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=85",
-        alt: "Sunset Overwater Villa at Dusk",
-        isPrimary: true,
-      },
-      {
-        url: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=85",
-        alt: "Sunset Overwater Villa Private Pool",
-      },
+      { url: VILLA_PHOTO_GROUPS["sunset-overwater"][0], alt: "Sunset Overwater Villa — Dusk View", isPrimary: true },
+      { url: VILLA_PHOTO_GROUPS["sunset-overwater"][1], alt: "Sunset Overwater Villa — Private Pool" },
+      { url: VILLA_PHOTO_GROUPS["sunset-overwater"][2], alt: "Sunset Overwater Villa — Ocean Deck" },
     ],
     amenities: [
       { icon: "waves", label: "Private plunge pool" },
@@ -122,12 +91,7 @@ export const VILLAS_SEED: Villa[] = [
       { icon: "refrigerator", label: "Minibar" },
       { icon: "tv", label: "Smart TV" },
     ],
-    highlights: [
-      "West-facing sunset views",
-      "Private plunge pool",
-      "Glass floor lounge",
-      "Double sun deck",
-    ],
+    highlights: ["West-facing sunset views", "Private plunge pool", "Glass floor lounge", "Double sun deck"],
     fromRateUSD: 1100,
     available: true,
     featured: true,
@@ -146,15 +110,9 @@ export const VILLAS_SEED: Villa[] = [
     maxOccupancy: 2,
     bedrooms: 1,
     images: [
-      {
-        url: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=1200&q=85",
-        alt: "Honeymoon Suite with Flower Bath",
-        isPrimary: true,
-      },
-      {
-        url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=85",
-        alt: "Honeymoon Suite Private Pool",
-      },
+      { url: VILLA_PHOTO_GROUPS.honeymoon[0], alt: "Honeymoon Suite — Lagoon View", isPrimary: true },
+      { url: VILLA_PHOTO_GROUPS.honeymoon[1], alt: "Honeymoon Suite — Private Pool" },
+      { url: VILLA_PHOTO_GROUPS.honeymoon[2], alt: "Honeymoon Suite — Sunset Deck" },
     ],
     amenities: [
       { icon: "waves", label: "Infinity private pool" },
@@ -165,12 +123,7 @@ export const VILLAS_SEED: Villa[] = [
       { icon: "coffee", label: "Champagne welcome" },
       { icon: "ship", label: "Sunset cruise included" },
     ],
-    highlights: [
-      "Infinity pool over lagoon",
-      "Dedicated butler",
-      "Sunset cruise included",
-      "In-villa dining setup",
-    ],
+    highlights: ["Infinity pool over lagoon", "Dedicated butler", "Sunset cruise included", "In-villa dining setup"],
     fromRateUSD: 1400,
     available: true,
     featured: true,

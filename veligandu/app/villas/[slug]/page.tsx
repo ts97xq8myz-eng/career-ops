@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { VILLAS_SEED, getVillaBySlug } from "@/lib/data/villas";
+import { getVillaPhotos } from "@/lib/data/places-photos";
 import { VILLA_CATEGORY_LABELS } from "@/types";
 import { RateDisplay } from "@/components/booking/rate-display";
 import { Button } from "@/components/ui/button";
@@ -40,16 +41,17 @@ export default async function VillaDetailPage({ params }: Params) {
   if (!villa) notFound();
 
   const rate = getFallbackRate(villa.category);
+  const placesPhotos = getVillaPhotos(villa.category);
 
   return (
     <>
-      {/* Gallery */}
+      {/* Gallery — 3 Google Places photos */}
       <div className="pt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 h-[60vh] md:h-[70vh]">
           <div className="relative">
             <Image
-              src={villa.images[0]?.url ?? ""}
-              alt={villa.images[0]?.alt ?? villa.name}
+              src={placesPhotos[0]}
+              alt={`${villa.name} — primary view`}
               fill
               priority
               className="object-cover"
@@ -57,11 +59,11 @@ export default async function VillaDetailPage({ params }: Params) {
             />
           </div>
           <div className="hidden md:grid grid-rows-2">
-            {villa.images.slice(1, 3).map((img, i) => (
+            {placesPhotos.slice(1, 3).map((src, i) => (
               <div key={i} className="relative">
                 <Image
-                  src={img.url}
-                  alt={img.alt}
+                  src={src}
+                  alt={`${villa.name} — view ${i + 2}`}
                   fill
                   className="object-cover"
                   sizes="50vw"
