@@ -22,6 +22,8 @@ export interface StayQuote {
     greenTax:      number;
     total:         number;
   };
+  transferType:    "speedboat" | "seaplane";
+  transferLabel:   string;
   transferCost:    number;
   directTotal:     number;
   savingsValue:    number;

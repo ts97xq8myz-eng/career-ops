@@ -70,7 +70,9 @@ export interface StayQuote {
     greenTax:      number;
     total:         number;
   };
-  transferCost:    number;    // speedboat RT × totalGuests
+  transferType:    "speedboat" | "seaplane";
+  transferLabel:   string;    // human-readable label for the transfer line
+  transferCost:    number;    // transfer RT × totalGuests
   directTotal:     number;    // directSubtotal + taxes.total + transferCost
 
   // ── Savings ───────────────────────────────────────────────────────────────
@@ -109,6 +111,7 @@ export function buildStayQuote(p: {
   availableUnits:    number;
   minStay:           number;
   isFallback?:       boolean;
+  transferType?:     "speedboat" | "seaplane";
 }): StayQuote {
   const nights      = countNights(p.checkIn, p.checkOut);
   const totalGuests = p.adults + p.children;
@@ -116,7 +119,7 @@ export function buildStayQuote(p: {
   // Public — excl. taxes & transfers
   const publicTotal = p.publicNightlyRate * nights;
 
-  // Direct — 9% below public, then add Maldives taxes + speedboat transfer
+  // Direct — 9% below public, then add Maldives taxes + selected transfer
   const directNightlyRate = p.publicNightlyRate * (1 - DIRECT_DISCOUNT_PERCENT / 100);
   const directSubtotal    = directNightlyRate * nights;
 
@@ -125,7 +128,9 @@ export function buildStayQuote(p: {
   const greenTax      = MALDIVES_TAXES.GREEN_TAX_PER_PERSON_PER_NIGHT * totalGuests * nights;
   const taxTotal      = gst + serviceCharge + greenTax;
 
-  const transferCost = TRANSFERS.speedboat.perPersonRoundTrip * totalGuests;
+  const transferType = p.transferType ?? "speedboat";
+  const transferCost = TRANSFERS[transferType].perPersonRoundTrip * totalGuests;
+  const transferLabel = TRANSFERS[transferType].label;
   const directTotal  = directSubtotal + taxTotal + transferCost;
 
   return {
@@ -144,6 +149,8 @@ export function buildStayQuote(p: {
     directNightlyRate,
     directSubtotal,
     taxes:             { gst, serviceCharge, greenTax, total: taxTotal },
+    transferType,
+    transferLabel,
     transferCost,
     directTotal,
 

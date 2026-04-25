@@ -74,6 +74,12 @@ service cloud.firestore {
       allow read, write: if request.auth != null && isAdmin();
     }
 
+    // Rate gate registrations — guests write to unlock direct rates, admin reads
+    match /registrations/{doc} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null && isAdmin();
+    }
+
     function isAdmin() {
       return exists(/databases/$(database)/documents/admin_users/$(request.auth.uid));
     }

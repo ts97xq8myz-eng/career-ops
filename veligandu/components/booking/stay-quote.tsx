@@ -142,7 +142,7 @@ export function StayQuoteDisplay({ quote: q, villaName, onEnquire }: StayQuotePr
             <Line label="GST" sub="(16%)" value={q.taxes.gst} />
             <Line label="Service Charge" sub="(10%)" value={q.taxes.serviceCharge} />
             <Line label="Green Tax" sub={`($6 × ${q.totalGuests} guests × ${q.nights}n)`} value={q.taxes.greenTax} />
-            <Line label="Return Speedboat Transfer" value={q.transferCost} />
+            <Line label={q.transferLabel} value={q.transferCost} />
           </div>
 
           {/* Total */}
