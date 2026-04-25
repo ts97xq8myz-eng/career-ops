@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { PlacesImage } from "@/components/ui/places-image";
 
 interface CardProps {
   className?: string;
@@ -23,13 +24,14 @@ export function Card({ className, children }: CardProps) {
 interface ImageCardProps {
   imageSrc: string;
   imageAlt: string;
+  placesIndex?: number;
   badge?: React.ReactNode;
   className?: string;
   children: React.ReactNode;
   onClick?: () => void;
 }
 
-export function ImageCard({ imageSrc, imageAlt, badge, className, children, onClick }: ImageCardProps) {
+export function ImageCard({ imageSrc, imageAlt, placesIndex, badge, className, children, onClick }: ImageCardProps) {
   return (
     <div
       className={cn(
@@ -40,13 +42,24 @@ export function ImageCard({ imageSrc, imageAlt, badge, className, children, onCl
       onClick={onClick}
     >
       <div className="relative h-64 overflow-hidden">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {placesIndex !== undefined ? (
+          <PlacesImage
+            index={placesIndex}
+            fallback={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        )}
         {badge && <div className="absolute top-3 left-3">{badge}</div>}
       </div>
       <div className="p-6">{children}</div>

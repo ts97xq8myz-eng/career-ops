@@ -38,6 +38,7 @@ export default function TransfersPage() {
         title="Getting Here"
         subtitle="From Malé, Veligandu is 35 minutes by seaplane or 2 hours by speedboat."
         image="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=85"
+        placesIndex={0}
       />
 
       <section className="py-24 bg-[var(--color-sand-cool)]">

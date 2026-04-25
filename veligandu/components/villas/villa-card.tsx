@@ -7,6 +7,13 @@ import type { Villa } from "@/types";
 import { VILLA_CATEGORY_LABELS } from "@/types";
 import { Users, Maximize2, Bed } from "lucide-react";
 
+const VILLA_PLACES_INDEX: Record<string, number> = {
+  overwater: 1,
+  beach: 2,
+  "sunset-overwater": 3,
+  honeymoon: 4,
+};
+
 interface VillaCardProps {
   villa: Villa;
 }
@@ -18,6 +25,7 @@ export function VillaCard({ villa }: VillaCardProps) {
     <ImageCard
       imageSrc={primaryImage?.url ?? "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"}
       imageAlt={primaryImage?.alt ?? villa.name}
+      placesIndex={VILLA_PLACES_INDEX[villa.category]}
       badge={
         villa.available ? (
           <Badge variant="available" dot>Available</Badge>

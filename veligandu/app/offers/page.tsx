@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { PageHero } from "@/components/layout/hero";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { PlacesImage } from "@/components/ui/places-image";
 
 export const metadata: Metadata = {
   title: "Special Offers",
@@ -17,7 +17,8 @@ const OFFERS = [
     id: "honeymoon-2025",
     title: "Honeymoon Escape Package",
     category: "Honeymoon",
-    image: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=800&q=80",
+    placesIndex: 4,
     description:
       "Champagne on arrival, daily breakfast, a sunset cruise for two, and a 30-minute couples massage. Available in the Honeymoon Suite.",
     savings: "Save $650 vs. booking separately",
@@ -29,7 +30,8 @@ const OFFERS = [
     id: "earlybird-2025",
     title: "Early Bird — 20% Off",
     category: "Seasonal",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+    placesIndex: 0,
     description:
       "Book at least 90 days in advance and receive 20% off the base rate across all villa categories. Non-refundable.",
     savings: "Save 20% on base rate",
@@ -41,7 +43,8 @@ const OFFERS = [
     id: "longstay-2025",
     title: "Stay 7, Pay 5",
     category: "Long Stay",
-    image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&q=80",
+    placesIndex: 1,
     description:
       "Book a minimum of 7 nights and enjoy 2 nights complimentary. Applies to all overwater villas. Daily breakfast included.",
     savings: "2 nights free on 7-night stays",
@@ -53,7 +56,8 @@ const OFFERS = [
     id: "dive-2025",
     title: "Dive & Stay Package",
     category: "Experience",
-    image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80",
+    placesIndex: 5,
     description:
       "5 nights in a Beach Villa with 10 guided dives included. Perfect for underwater explorers. PADI instructors available.",
     savings: "Dives worth $400 included",
@@ -70,6 +74,7 @@ export default function OffersPage() {
         title="Special Offers"
         subtitle="Exclusive packages available only when you book direct."
         image="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=85"
+        placesIndex={3}
       />
 
       <section className="py-24 bg-[var(--color-sand-cool)]">
@@ -87,8 +92,9 @@ export default function OffersPage() {
                 className="bg-white rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hero)] transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative h-56">
-                  <Image
-                    src={offer.image}
+                  <PlacesImage
+                    index={offer.placesIndex}
+                    fallback={offer.fallback}
                     alt={offer.title}
                     fill
                     className="object-cover"

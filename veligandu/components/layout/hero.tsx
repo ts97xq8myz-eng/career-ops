@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { PlacesImage } from "@/components/ui/places-image";
 
 interface HeroProps {
   title: string;
@@ -8,6 +9,7 @@ interface HeroProps {
   eyebrow?: string;
   image: string;
   imageAlt?: string;
+  placesIndex?: number;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   overlay?: "dark" | "ocean" | "none";
@@ -21,6 +23,7 @@ export function Hero({
   eyebrow,
   image,
   imageAlt = "Veligandu Maldives",
+  placesIndex,
   primaryCta,
   secondaryCta,
   overlay = "dark",
@@ -41,14 +44,26 @@ export function Hero({
 
   return (
     <section className={`relative flex items-center ${heightClass}`}>
-      <Image
-        src={image}
-        alt={imageAlt}
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
-      />
+      {placesIndex !== undefined ? (
+        <PlacesImage
+          index={placesIndex}
+          fallback={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      ) : (
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      )}
       <div className={`absolute inset-0 ${overlayClass}`} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -96,14 +111,16 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   image: string;
+  placesIndex?: number;
 }
 
-export function PageHero({ title, subtitle, image }: PageHeroProps) {
+export function PageHero({ title, subtitle, image, placesIndex }: PageHeroProps) {
   return (
     <Hero
       title={title}
       subtitle={subtitle}
       image={image}
+      placesIndex={placesIndex}
       overlay="ocean"
       height="medium"
     />

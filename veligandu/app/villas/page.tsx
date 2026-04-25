@@ -17,6 +17,7 @@ export default function VillasPage() {
         title="Villas & Suites"
         subtitle="Every room is a private sanctuary. Choose your corner of paradise."
         image="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1920&q=85"
+        placesIndex={1}
       />
 
       <section className="py-24 bg-[var(--color-sand-cool)]">

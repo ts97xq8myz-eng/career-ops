@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Hero } from "@/components/layout/hero";
 import { BookingWidget } from "@/components/booking/booking-widget";
 import { VillaCard } from "@/components/villas/villa-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
+import { PlacesImage } from "@/components/ui/places-image";
 import { VILLAS_SEED } from "@/lib/data/villas";
 import { CheckCircle, Star, ShieldCheck, Headphones } from "lucide-react";
 
@@ -25,17 +25,20 @@ const DIRECT_BENEFITS = [
 const EXPERIENCES = [
   {
     title: "Snorkelling & Diving",
-    image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&q=80",
+    fallback: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&q=80",
+    placesIndex: 5,
     href: "/experiences",
   },
   {
     title: "Spa & Wellness",
-    image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80",
+    fallback: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80",
+    placesIndex: 6,
     href: "/experiences",
   },
   {
     title: "Fine Dining",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+    fallback: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+    placesIndex: 10,
     href: "/dining",
   },
 ];
@@ -50,10 +53,10 @@ export default function HomePage() {
           subtitle="An intimate island paradise where every villa floats above turquoise waters and every sunset belongs to you."
           eyebrow="Veligandu Island Resort · North Ari Atoll"
           image="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1920&q=90"
+          placesIndex={0}
           overlay="dark"
           height="full"
         />
-        {/* Booking widget sits at the bottom of the hero */}
         <div className="absolute bottom-8 left-0 right-0 z-20 max-w-5xl mx-auto px-4 sm:px-6">
           <BookingWidget />
         </div>
@@ -133,8 +136,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {EXPERIENCES.map((exp) => (
               <Link key={exp.title} href={exp.href} className="group relative h-80 rounded-2xl overflow-hidden">
-                <Image
-                  src={exp.image}
+                <PlacesImage
+                  index={exp.placesIndex}
+                  fallback={exp.fallback}
                   alt={exp.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"

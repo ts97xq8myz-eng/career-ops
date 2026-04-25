@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/layout/hero";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
+import { PlacesImage } from "@/components/ui/places-image";
 
 export const metadata: Metadata = {
   title: "Experiences",
@@ -14,37 +14,43 @@ export const metadata: Metadata = {
 const EXPERIENCES = [
   {
     title: "House Reef Snorkelling",
-    image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80",
+    placesIndex: 5,
     desc: "Step off your villa deck directly onto one of the richest reefs in the Maldives. Resident turtles, manta rays, and whale sharks await.",
     tag: "Marine",
   },
   {
     title: "PADI Scuba Diving",
-    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    placesIndex: 7,
     desc: "Our PADI-certified dive centre offers courses for all levels. Night dives, drift dives, and shark point are not to be missed.",
     tag: "Marine",
   },
   {
     title: "Sunset Cruise",
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+    placesIndex: 8,
     desc: "Champagne on the Indian Ocean as the sun dips below the horizon. Includes snacks, dolphin spotting, and stargazing on the return.",
     tag: "Romance",
   },
   {
     title: "Spa & Wellness",
-    image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&q=80",
+    placesIndex: 6,
     desc: "The Veligandu Spa is set overwater with ocean views from the treatment table. Signature Maldivian rituals use locally sourced ingredients.",
     tag: "Wellness",
   },
   {
     title: "Watersports",
-    image: "https://images.unsplash.com/photo-1530870110042-98b2cb110834?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1530870110042-98b2cb110834?w=800&q=80",
+    placesIndex: 9,
     desc: "Jet ski, windsurfing, kayaking, paddleboarding, and parasailing — the lagoon is your playground.",
     tag: "Adventure",
   },
   {
     title: "Island Fishing",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+    fallback: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+    placesIndex: 14,
     desc: "Traditional Maldivian hand-line fishing at sunset, followed by our chef cooking your catch at the beachside grill.",
     tag: "Culture",
   },
@@ -57,6 +63,7 @@ export default function ExperiencesPage() {
         title="Experiences"
         subtitle="Every day at Veligandu is an invitation to explore above and below the waterline."
         image="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1920&q=85"
+        placesIndex={5}
       />
 
       <section className="py-24 bg-[var(--color-sand-cool)]">
@@ -70,8 +77,9 @@ export default function ExperiencesPage() {
             {EXPERIENCES.map((exp) => (
               <div key={exp.title} className="bg-white rounded-2xl overflow-hidden shadow-[var(--shadow-card)] group hover:shadow-[var(--shadow-hero)] hover:-translate-y-1 transition-all duration-300">
                 <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={exp.image}
+                  <PlacesImage
+                    index={exp.placesIndex}
+                    fallback={exp.fallback}
                     alt={exp.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
