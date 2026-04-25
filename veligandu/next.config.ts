@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.googleusercontent.com" },
       { protocol: "https", hostname: "streetviewpixels-pa.googleapis.com" },
     ],
-    unoptimized: false,
+    unoptimized: true,
   },
   env: {
     NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+9609999999",
