@@ -17,6 +17,8 @@ import { trackLeadSubmit, trackBookingEngineOpened } from "@/lib/ads/gtag";
 import { trackInitiateCheckout } from "@/lib/ads/meta";
 import { NEAREST_AIRPORTS, VILLA_CATEGORY_LABELS } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { httpsCallable } from "firebase/functions";
+import { getClientFunctions } from "@/lib/firebase/client";
 import { CheckCircle } from "lucide-react";
 
 const schema = z.object({
@@ -101,15 +103,12 @@ function BookFormInner() {
   const onSubmit = async (data: FormOutput) => {
     setLoading(true);
     try {
-      // Submit lead via API route (Firebase Function in production)
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, selectedRate: rate.directRatePerNight }),
-      });
-
-      if (!res.ok) throw new Error("Submission failed");
-      const { leadId } = await res.json() as { leadId: string };
+      const submitLeadFn = httpsCallable<Record<string, unknown>, { leadId: string }>(
+        getClientFunctions(),
+        "submitLead"
+      );
+      const result = await submitLeadFn({ ...data, selectedRate: rate.directRatePerNight });
+      const { leadId } = result.data;
 
       trackLeadSubmit(data.villaCategory, rate.directRatePerNight);
       router.push(`/book/confirmation?leadId=${leadId}&name=${encodeURIComponent(data.fullName)}&email=${encodeURIComponent(data.email)}`);

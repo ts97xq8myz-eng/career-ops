@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { VILLAS_SEED } from "@/lib/data/villas";
 
+export const dynamic = "force-static";
+
 const BASE = "https://veligandu.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
