@@ -1,12 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { usePlacePhotos } from "@/lib/places/hooks";
+import { getPlacesPhoto } from "@/lib/data/places-photos";
 
 interface PlacesImageProps {
-  /** Which photo index to use from the Google Places results (0 = first/best photo) */
+  /** Which photo index to use (0–9, wraps around) */
   index?: number;
-  /** Unsplash or other URL shown until Places photos load, or if Places API is unconfigured */
+  /** Shown if the Places photo fails to load */
   fallback: string;
   alt: string;
   className?: string;
@@ -28,8 +26,7 @@ export function PlacesImage({
   priority,
   sizes,
 }: PlacesImageProps) {
-  const { photos } = usePlacePhotos(index + 1);
-  const src = photos[index] ?? fallback;
+  const src = getPlacesPhoto(index);
 
   if (fill) {
     return (
