@@ -22,43 +22,45 @@ const GTAG_ID = process.env.NEXT_PUBLIC_GTAG_ID ?? "";
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://veligandu.com"),
+  metadataBase: new URL("https://veligandumaldives.reservationsandsales.com"),
   title: {
-    default: "Veligandu Island Resort — Maldives Direct Booking",
-    template: "%s | Veligandu Maldives",
+    default: "Veligandu Maldives — Direct Booking | Reservations & Sales",
+    template: "%s | Veligandu Maldives · Reservations & Sales",
   },
   description:
-    "Book direct at Veligandu Island Resort in the Maldives for the best available rate. Overwater villas, beach villas, and honeymoon suites in the pristine Indian Ocean.",
+    "Book direct at Veligandu Island Resort, Maldives. Exclusive rates on overwater villas, beach villas and honeymoon suites. Managed by Reservations & Sales — your Maldives specialists.",
   keywords: [
-    "Veligandu",
-    "Maldives resort",
-    "overwater villa",
+    "Veligandu Island Resort",
+    "Veligandu Maldives",
+    "Reservations and Sales",
     "Maldives direct booking",
+    "overwater villa Maldives",
     "North Ari Atoll",
     "Maldives honeymoon",
-    "luxury Maldives",
+    "luxury Maldives resort",
+    "Rasdhoo Atoll",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://veligandu.com",
-    siteName: "Veligandu Island Resort",
-    title: "Veligandu Island Resort — Maldives Direct Booking",
+    url: "https://veligandumaldives.reservationsandsales.com",
+    siteName: "Veligandu Maldives · Reservations & Sales",
+    title: "Veligandu Maldives — Direct Booking | Reservations & Sales",
     description:
-      "Book direct for the best rate. Overwater villas and beach villas in the heart of the Indian Ocean.",
+      "Book direct for the best rate. Overwater villas and beach villas managed exclusively by Reservations & Sales.",
     images: [
       {
         url: "https://lh3.googleusercontent.com/places/ANXAkqE-K0E7FqXZiimT71mUNuRYKokrRTx1MsTObRhxYjKqw3YIVPSF1wQZ6CnPCM8KXU_gKIVpYJ73JtfY0utYewUF7Xn3Wicu2Pw=s1200-w1200",
         width: 1200,
         height: 630,
-        alt: "Veligandu Maldives Overwater Villa",
+        alt: "Veligandu Island Resort — Overwater Villa, Maldives",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Veligandu Island Resort — Maldives",
-    description: "Book direct for the best available rate.",
+    title: "Veligandu Maldives | Reservations & Sales",
+    description: "Direct booking — best rate guaranteed. Overwater villas in the Indian Ocean.",
   },
   robots: {
     index: true,
@@ -79,22 +81,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "LodgingBusiness",
               name: "Veligandu Island Resort",
-              description: "Luxury overwater and beach villa resort in the Maldives",
-              url: "https://veligandu.com",
+              alternateName: "Veligandu Maldives",
+              description: "Luxury overwater and beach villa resort in the Maldives, managed by Reservations & Sales.",
+              url: "https://veligandumaldives.reservationsandsales.com",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Rasdhoo Atoll",
+                streetAddress: "Veligandu Island, Rasdhoo Atoll",
+                addressLocality: "Alifu Dhaalu",
                 addressRegion: "North Ari Atoll",
                 addressCountry: "MV",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: "4.2167",
+                latitude: "4.0167",
                 longitude: "72.9833",
               },
               starRating: { "@type": "Rating", ratingValue: "5" },
-              telephone: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+9609999999",
-              email: process.env.NEXT_PUBLIC_RESORT_EMAIL ?? "reservations@veligandu.com",
+              telephone: process.env.NEXT_PUBLIC_RESORT_PHONE ?? "+9606660519",
+              email: process.env.NEXT_PUBLIC_RESORT_EMAIL ?? "veligandu@reservationsandsales.com",
+              sameAs: [
+                "https://www.reservationsandsales.com",
+              ],
             }),
           }}
         />

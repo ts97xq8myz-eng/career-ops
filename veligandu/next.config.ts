@@ -14,8 +14,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   env: {
-    NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+9609999999",
-    NEXT_PUBLIC_RESORT_EMAIL: process.env.NEXT_PUBLIC_RESORT_EMAIL ?? "reservations@veligandu.com",
+    NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "+9607779519",
+    NEXT_PUBLIC_RESORT_EMAIL:   process.env.NEXT_PUBLIC_RESORT_EMAIL   ?? "veligandu@reservationsandsales.com",
+    NEXT_PUBLIC_RESORT_PHONE:   process.env.NEXT_PUBLIC_RESORT_PHONE   ?? "+960 666 0519",
   },
 };
 
