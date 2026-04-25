@@ -69,6 +69,11 @@ service cloud.firestore {
       allow read, write: if request.auth != null && isAdmin();
     }
 
+    // WhatsApp offer queue — written by Cloud Function, admin reads to dispatch
+    match /whatsapp_queue/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
     function isAdmin() {
       return exists(/databases/$(database)/documents/admin_users/$(request.auth.uid));
     }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Hero } from "@/components/layout/hero";
 import { BookingWidget } from "@/components/booking/booking-widget";
 import { LiveVillaGrid } from "@/components/villas/live-villa-grid";
+import { HomeRateSearch } from "@/components/booking/home-rate-search";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Button } from "@/components/ui/button";
 import { PlacesImage } from "@/components/ui/places-image";
@@ -18,10 +19,10 @@ export const metadata: Metadata = {
 };
 
 const DIRECT_BENEFITS = [
-  { icon: ShieldCheck, title: "Lowest Rate Guaranteed", desc: "Book direct and beat any OTA price." },
-  { icon: CheckCircle, title: "Flexible Cancellation", desc: "More generous terms than third-party sites." },
-  { icon: Headphones, title: "24/7 Concierge", desc: "Direct line to our reservations team." },
-  { icon: Star, title: "Exclusive Extras", desc: "Complimentary transfers, wine, and more." },
+  { icon: ShieldCheck, title: "9% Below Any OTA", desc: "Our direct rate is always 9% below Booking.com — before we even count the tax and transfer savings." },
+  { icon: CheckCircle, title: "All-Inclusive Price", desc: "Taxes, Green Tax, service charge, and return speedboat transfer. No surprises at checkout." },
+  { icon: Headphones, title: "24-Hour Confirmation", desc: "Every enquiry is answered personally by a named reservations contact — not a chatbot." },
+  { icon: Star, title: "Your Channel, Your Terms", desc: "Receive your exclusive offer by email or WhatsApp. Reply YES to hold your villa." },
 ];
 
 const EXPERIENCES = [
@@ -114,23 +115,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Rate Comparison Banner */}
-      <section className="py-16 bg-[var(--color-gold-pale)]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[var(--color-gold-dark)] text-sm font-semibold uppercase tracking-widest mb-3">
-            Best Rate Promise
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-ocean)] mb-4">
-            Book Direct. Save More.
-          </h2>
-          <p className="text-[var(--color-ocean-muted)] text-lg mb-8 max-w-2xl mx-auto">
-            Our direct booking rate is always lower than what you'll find on Booking.com, Expedia, or any OTA — before tax. We compare rates in real time so you never overpay.
-          </p>
-          <Link href="/book">
-            <Button variant="primary" size="xl">
-              Get the Best Rate Now
-            </Button>
-          </Link>
+      {/* Live Rate Search Banner */}
+      <section className="py-20 bg-[var(--color-ocean)]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-[var(--color-gold)] text-xs font-bold uppercase tracking-widest mb-3">
+              9% Below Any OTA · All-Inclusive Price · 24h Confirmation
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3">
+              Your Rate, Calculated Live
+            </h2>
+            <p className="text-white/60 text-base max-w-xl mx-auto">
+              Select your dates. See the real all-inclusive total — taxes, transfers, everything — side by side with what Booking.com would charge.
+            </p>
+          </div>
+          <HomeRateSearch />
         </div>
       </section>
 
