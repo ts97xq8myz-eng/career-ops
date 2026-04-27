@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Users, DollarSign, Home, Megaphone,
-  FileText, LogOut
+  FileText, LogOut, Loader2,
 } from "lucide-react";
 
 const NAV = [
@@ -19,11 +20,38 @@ const NAV = [
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const router   = useRouter();
+  const pathname  = usePathname();
+  const router    = useRouter();
+  const [authReady, setAuthReady] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/admin/login") { setAuthReady(true); return; }
+
+    let unsubscribe: (() => void) | undefined;
+    (async () => {
+      const { getClientAuth }       = await import("@/lib/firebase/client");
+      const { onAuthStateChanged }  = await import("firebase/auth");
+      unsubscribe = onAuthStateChanged(getClientAuth(), (user) => {
+        if (!user) {
+          router.replace("/admin/login");
+        } else {
+          setAuthReady(true);
+        }
+      });
+    })();
+    return () => unsubscribe?.();
+  }, [pathname, router]);
 
   if (pathname === "/admin/login") {
     return <>{children}</>;
+  }
+
+  if (!authReady) {
+    return (
+      <div className="min-h-screen bg-[var(--color-ocean)] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-[var(--color-gold)] animate-spin" />
+      </div>
+    );
   }
 
   const handleLogout = async () => {
