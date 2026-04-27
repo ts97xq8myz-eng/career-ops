@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public readable collections
+    match /villas/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /rates/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /experiences/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /dining/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /flight_redirects/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+
+    // Write-only for guests (leads submitted via Cloud Function)
+    match /leads/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
+    // Admin-only collections
+    match /conversions/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /audit_logs/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /ad_campaigns/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /inventory/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+
+    // Kafka-populated collections — public read, function write only
+    match /inventory_summary/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /kafka_events/{doc} {
+      allow read: if request.auth != null && isAdmin();
+      allow write: if request.auth != null && isAdmin();
+    }
+    match /kafka_offsets/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+    match /kafka_webhook_log/{doc} {
+      allow read: if request.auth != null && isAdmin();
+      allow write: if request.auth != null && isAdmin();
+    }
+
+    match /admin_users/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
+    // WhatsApp offer queue — written by Cloud Function, admin reads to dispatch
+    match /whatsapp_queue/{doc} {
+      allow read, write: if request.auth != null && isAdmin();
+    }
+
+    // Rate gate registrations — guests write to unlock direct rates, admin reads
+    match /registrations/{doc} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null && isAdmin();
+    }
+
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/admin_users/$(request.auth.uid));
+    }
+  }
+}

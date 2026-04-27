@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Ocean blue palette */
+  --color-ocean: #0B2447;
+  --color-ocean-light: #19376D;
+  --color-ocean-dark: #061830;
+  --color-ocean-muted: #2d4a7a;
+
+  /* Sand palette */
+  --color-sand: #F5F0E8;
+  --color-sand-warm: #EDE8DF;
+  --color-sand-cool: #FAF8F4;
+  --color-sand-dark: #D4C9B5;
+
+  /* Gold palette */
+  --color-gold: #C9A96E;
+  --color-gold-light: #D4B882;
+  --color-gold-dark: #A8844A;
+  --color-gold-pale: #F0E4CC;
+
+  /* Status */
+  --color-available: #22C55E;
+  --color-limited: #F59E0B;
+  --color-unavailable: #EF4444;
+
+  /* Typography */
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Spacing & radius */
+  --radius-luxury: 0.75rem;
+  --radius-card: 1rem;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px 0 rgba(11, 36, 71, 0.12);
+  --shadow-hero: 0 8px 48px 0 rgba(11, 36, 71, 0.3);
+}
+
+:root {
+  --background: var(--color-sand-cool);
+  --foreground: var(--color-ocean);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Luxury heading styles */
+.heading-luxury {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ocean);
+}
+
+/* Gold divider */
+.divider-gold {
+  width: 4rem;
+  height: 2px;
+  background: var(--color-gold);
+  margin: 1rem 0;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Subtle animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Booking widget input override */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-sand); }
+::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
