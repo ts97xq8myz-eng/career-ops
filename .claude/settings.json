@@ -1,0 +1,21 @@
+{
+  "extraKnownMarketplaces": {
+    "obra-superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "superpowers@obra-superpowers-marketplace": true,
+    "superpowers-chrome@obra-superpowers-marketplace": true,
+    "elements-of-style@obra-superpowers-marketplace": true,
+    "episodic-memory@obra-superpowers-marketplace": true,
+    "superpowers-lab@obra-superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@obra-superpowers-marketplace": true,
+    "claude-session-driver@obra-superpowers-marketplace": true,
+    "private-journal-mcp@obra-superpowers-marketplace": true,
+    "double-shot-latte@obra-superpowers-marketplace": true
+  }
+}
