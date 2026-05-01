@@ -15,6 +15,7 @@ export function VillaPlayer() {
         autoPlay
         loop
         controls={false}
+        acknowledgeRemotionLicense
         style={{ width: "100%", height: "100%" }}
       />
     </div>

@@ -75,8 +75,12 @@ service cloud.firestore {
     }
 
     // Rate gate registrations — guests write to unlock direct rates, admin reads
+    // Enforces: required fields present, createdAt is server time, source is valid string
     match /registrations/{doc} {
-      allow create: if true;
+      allow create: if request.resource.data.keys().hasAll(["type", "source", "createdAt"])
+                    && request.resource.data.createdAt == request.time
+                    && request.resource.data.source is string
+                    && request.resource.data.type in ["email", "mobile"];
       allow read, update, delete: if request.auth != null && isAdmin();
     }
 

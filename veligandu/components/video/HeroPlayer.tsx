@@ -14,6 +14,7 @@ export function HeroPlayer() {
       autoPlay
       loop
       controls={false}
+      acknowledgeRemotionLicense
       style={{
         position: "absolute",
         inset: 0,
